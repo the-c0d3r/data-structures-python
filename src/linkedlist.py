@@ -60,7 +60,7 @@ class LinkedList:
         pass
 
     def __contains__(self, node: Node) -> bool:
-        return node in list(self.iterate())
+        return node in self.iterate()
 
     @property
     def head(self) -> Node:
