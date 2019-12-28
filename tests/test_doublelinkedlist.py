@@ -52,6 +52,35 @@ class TestDoubleLinkedList:
 
         assert doublelinkedlist.last.prev == nodelist[-2]
 
+    def test_get(self, doublelinkedlist):
+        node1 = DoubleLinkedNode(1)
+        node2 = DoubleLinkedNode(2)
+        node3 = DoubleLinkedNode(3)
+        doublelinkedlist.insert(node1)
+        doublelinkedlist.insert(node2)
+        doublelinkedlist.insert(node3)
+
+        assert doublelinkedlist.get(0) == node1
+        assert doublelinkedlist.get(1) == node2
+        assert doublelinkedlist.get(2) == node3
+        assert doublelinkedlist.get(1000) is None
+
+    def test_pop(self, doublelinkedlist):
+        node1 = DoubleLinkedNode(1)
+        node2 = DoubleLinkedNode(2)
+        node3 = DoubleLinkedNode(3)
+        doublelinkedlist.insert(node1)
+        doublelinkedlist.insert(node2)
+        doublelinkedlist.insert(node3)
+
+        assert doublelinkedlist.pop() == node3
+        assert doublelinkedlist.size == 2
+        assert doublelinkedlist.pop() == node2
+        assert doublelinkedlist.size == 1
+        assert doublelinkedlist.pop() == node1
+        assert doublelinkedlist.size == 0
+        assert doublelinkedlist.pop() is None
+
     def test_delete_head(self, doublelinkedlist):
         node1 = DoubleLinkedNode(1)
         node2 = DoubleLinkedNode(2)
@@ -100,3 +129,5 @@ class TestDoubleLinkedList:
         assert doublelinkedlist.size == 2
         assert doublelinkedlist.head.next == node2
         assert doublelinkedlist.last.prev == node1
+
+

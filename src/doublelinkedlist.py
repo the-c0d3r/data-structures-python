@@ -1,3 +1,5 @@
+from typing import Optional
+
 from linkedlist import LinkedList
 from linkedlist import Node
 
@@ -61,3 +63,24 @@ class DoubleLinkedList(LinkedList):
                 ptr.prev.next = ptr.next
                 ptr.next.prev = ptr.prev
                 return
+
+    def pop(self) -> Optional[DoubleLinkedNode]:
+        """Pops the last item in chain and return the node"""
+        # Case when it is empty list
+        if self._last is None:
+            return None
+
+        # Case when it is the last remaining node
+        if self._head == self._last:
+            node = self._head
+            self._head = None
+            self._last = None
+            self._pointer = None
+            return node
+
+        # Case when it is not the only remaining node
+        node = self._last
+        self._last = self._last.prev
+        self._last.next = None
+
+        return node
