@@ -122,11 +122,11 @@ class TestLinkedList:
 
         assert linkedlist.size == 2
         assert linkedlist.head == node1
-        assert linkedlist.last != node2
+        assert linkedlist.last == node2
         assert linkedlist.last != node3
-        assert node1 not in linkedlist
+        assert node1 in linkedlist
         assert node2 in linkedlist
-        assert node3 in linkedlist
+        assert node3 not in linkedlist
 
     def test_delete_mid(self, linkedlist, node):
         node1, node2, node3 = Node(1), Node(2), Node(3)
@@ -140,6 +140,10 @@ class TestLinkedList:
         assert node1 in linkedlist
         assert node2 not in linkedlist
         assert node3 in linkedlist
+
+        assert linkedlist.head == node1
+        assert linkedlist.last == node3
+        assert linkedlist.head.next == node3
 
     def test_iterate(self, linkedlist, node):
         linkedlist.insert(node)

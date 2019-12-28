@@ -60,7 +60,7 @@ class LinkedList:
         pass
 
     def __contains__(self, node: Node) -> bool:
-        return node in self.iterate()
+        return node in list(self.iterate())
 
     @property
     def head(self) -> Node:
@@ -81,65 +81,73 @@ class LinkedList:
     @property
     def size(self) -> int:
         """Returns number of elements in linked list"""
-        nodes = list(self.iterate())
-        return len(nodes)
+        return len(self.iterate())
 
     def insert(self, node: Node) -> None:
         """Inserts the node into the list"""
-        # empty linked list
+        # empty linked list, point all three pointers to node
         if self._head is None:
             self._head = node
             self._last = node
-            self._pointer = self._head
+            self._pointer = node
         else:
-            # iterate through the linked list for the last node
-            ptr = self._head
-            while ptr.next:
-                ptr = ptr.next
-            # set value of the last node to the inserted node
-            ptr.next = node
+            # update old _last node's next to new node, update _last to new node
+            self._last.next = node
             self._last = node
 
     def delete(self, node: Node) -> None:
         """Deletes the given node from list"""
+        # Case when node does not exist
         if node not in self:
             return
 
-        # if node is the only node in linkedlist
-        if node == self._head:
-            if self._head == self._last:
-                self._head = None
-                self._last = None
-                self._pointer = None
-            else:
-                self._head = self._head.next
-                return
+        # Case when node is the only node
+        if self.size == 1:
+            self._head = None
+            self._last = None
+            self._pointer = None
+            return
 
-        # fix the test_delete_mid and test_delete_tail
+        # Case when node is head
+        if node == self._head:
+            self._head = self._head.next
+            self._pointer = self._head
+            return
+
+        # Case when node is last
+        if node == self._last:
+            # iterate to exhaust all the nodes and get the last node before
+            ptr = self._head
+            prev = None
+            while ptr.next:
+                prev = ptr
+                ptr = ptr.next
+            self._last = prev
+            prev.next = None
+            return
+
+        # Case when node is in the middle
         ptr = self._head
-        prev = ptr
-        while ptr:
+        prev = None
+        while ptr.next:
+            prev = ptr
+            ptr = ptr.next
             if ptr == node:
                 prev.next = ptr.next
                 return
-            prev = ptr
-            ptr = ptr.next
 
-        # list(self.iterate())
-        # it seems if the pointer is reset here, it works fine
-        nodelist = list(self.iterate())
-        print("\n>> nodelist: ", nodelist)
-        self._pointer = self._head
-        return
-
-    def iterate(self) -> collections.iterable:
-        """Iterates the entire list"""
+    def iterate(self) -> [Optional[Node]]:
+        """
+        Note: if generator approach is used, one needs to make sure self._pointer
+        is reset. This will not happen in condition checks like Node "in" self. In
+        this case, when node exists, it will just return, without the resetting of
+        self._pointer being executed
+        """
+        nodes = []
         while self._pointer:
-            temp = self._pointer
-            nextnode = self._pointer.next
-            self._pointer = nextnode
-            # bug: self._pointer does not seem to be updated to nextnode
-            yield temp
-        # restore the pointer to the head
+            nodes.append(self._pointer)
+            self._pointer = self._pointer.next
+
         self._pointer = self._head
+        return nodes
 
