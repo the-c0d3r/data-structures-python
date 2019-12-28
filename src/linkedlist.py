@@ -82,6 +82,49 @@ class LinkedList:
         """Returns number of elements in linked list"""
         return len(self.iterate())
 
+    def get(self, index: int) -> Optional[Node]:
+        """
+        Returns the node at position
+        @param index: the index of the item to acquire from the list
+        """
+        if index > self.size:
+            return None
+
+        count = 0
+
+        ptr = self._head
+        while ptr:
+            if count == index:
+                return ptr
+            count += 1
+            ptr = ptr.next
+        return None
+
+    def pop(self) -> Optional[Node]:
+        """Pops the last item in chain and return the node"""
+        # Case when it is empty list
+        if self._last is None:
+            return None
+
+        # Case when it is the last remaining node
+        if self._head == self._last:
+            node = self._head
+            self._head = None
+            self._last = None
+            self._pointer = None
+            return node
+
+        # Case when it is not the only remaining node
+        ptr = self._head
+        while ptr:
+            if ptr.next == self._last:
+                break
+            ptr = ptr.next
+        last_node = ptr.next
+        ptr.next = None
+        self._last = ptr
+        return last_node
+
     def insert(self, node: Node) -> None:
         """Inserts the node into the list"""
         # empty linked list, point all three pointers to node
@@ -128,7 +171,7 @@ class LinkedList:
         # Case when node is in the middle
         ptr = self._head
         prev = None
-        while ptr.next:
+        while ptr:
             prev = ptr
             ptr = ptr.next
             if ptr == node:

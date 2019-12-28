@@ -80,6 +80,35 @@ class TestLinkedList:
         for index, node in enumerate(linkedlist.iterate()):
             assert node == nodelist[index]
 
+    def test_get(self, linkedlist):
+        node1 = Node(1)
+        node2 = Node(2)
+        node3 = Node(3)
+        linkedlist.insert(node1)
+        linkedlist.insert(node2)
+        linkedlist.insert(node3)
+
+        assert linkedlist.get(0) == node1
+        assert linkedlist.get(1) == node2
+        assert linkedlist.get(2) == node3
+        assert linkedlist.get(1000) is None
+
+    def test_pop(self, linkedlist):
+        node1 = Node(1)
+        node2 = Node(2)
+        node3 = Node(3)
+        linkedlist.insert(node1)
+        linkedlist.insert(node2)
+        linkedlist.insert(node3)
+
+        assert linkedlist.pop() == node3
+        assert linkedlist.size == 2
+        assert linkedlist.pop() == node2
+        assert linkedlist.size == 1
+        assert linkedlist.pop() == node1
+        assert linkedlist.size == 0
+        assert linkedlist.pop() is None
+
     def test_contains(self, linkedlist):
         nodelist = [Node(_) for _ in range(10)]
         for node in nodelist:
@@ -160,3 +189,4 @@ class TestLinkedList:
 
         nodelist = [node for node in linkedlist.iterate()]
         assert len(nodelist) == 1
+
