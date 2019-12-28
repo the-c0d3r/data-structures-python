@@ -1,4 +1,4 @@
-from typing import Any, List
+from typing import Any
 
 """
 This stack class is implemented in python without
@@ -50,4 +50,3 @@ class Stack:
         Returns the current size of the stack
         """
         return self._index
-

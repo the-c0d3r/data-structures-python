@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-import collections
-from typing import Any, Optional
 import uuid
+from typing import Any, Optional
 
 
 class Node:
@@ -150,4 +149,3 @@ class LinkedList:
 
         self._pointer = self._head
         return nodes
-

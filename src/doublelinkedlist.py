@@ -1,5 +1,5 @@
-from linkedlist import Node
 from linkedlist import LinkedList
+from linkedlist import Node
 
 
 class DoubleLinkedNode(Node):
@@ -12,7 +12,6 @@ class DoubleLinkedNode(Node):
     @prev.setter
     def prev(self, value):
         self._prev = value
-
 
 
 class DoubleLinkedList(LinkedList):

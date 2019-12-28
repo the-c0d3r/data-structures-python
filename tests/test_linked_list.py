@@ -1,4 +1,5 @@
 from uuid import UUID
+
 import pytest
 
 from src.linkedlist import Node, LinkedList
@@ -159,5 +160,3 @@ class TestLinkedList:
 
         nodelist = [node for node in linkedlist.iterate()]
         assert len(nodelist) == 1
-
-
