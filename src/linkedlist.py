@@ -87,7 +87,7 @@ class LinkedList:
         Returns the node at position
         @param index: the index of the item to acquire from the list
         """
-        if index > self.size:
+        if index < 0 or index > self.size:
             return None
 
         count = 0
@@ -192,3 +192,4 @@ class LinkedList:
 
         self._pointer = self._head
         return nodes
+
