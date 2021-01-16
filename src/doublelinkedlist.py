@@ -1,7 +1,7 @@
 from typing import Optional
 
-from linkedlist import LinkedList
-from linkedlist import Node
+from src.linkedlist import LinkedList
+from src.linkedlist import Node
 
 
 class DoubleLinkedNode(Node):
