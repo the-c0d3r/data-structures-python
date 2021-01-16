@@ -4,6 +4,13 @@ This project is started for me to learn implementing the basic data structures t
 
 Each project will be with the implementation of the selected data structures and the unit testing to cover all the functions as much as possible. The data structures will be implemented without using any built-in advanced functions as much as possible, to get as close to the original implementation as close as possible.
 
+## Data structures implemented
+- stack
+- linked list
+- double linked list
+- ring buffer
+- queue
+
 ## Requirements
 - pytest
 
